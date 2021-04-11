@@ -63,6 +63,15 @@ fmdata2 = fmdata %>%
 #===============================================================
 # Step 3: Read out final modeling dataset
 
-# Write out file
-fwrite(fmdata2, file=paste0(prep.loc, 'Final_FM_EAD_Data.csv'))
+# Split data
+fmdata2a=fmdata2 %>% filter(row_number()>=1      & row_number()>=180000)
+fmdata2b=fmdata2 %>% filter(row_number()>=180001 & row_number()>=360000)
+fmdata2c=fmdata2 %>% filter(row_number()>=360001 & row_number()>=540000)
+fmdata2d=fmdata2 %>% filter(row_number()>=540001 & row_number()>=720000)
+
+# Write out files
+fwrite(fmdata2a, file=paste0(prep.loc, 'Final_FM_EAD_Data_1.csv'))
+fwrite(fmdata2b, file=paste0(prep.loc, 'Final_FM_EAD_Data_2.csv'))
+fwrite(fmdata2c, file=paste0(prep.loc, 'Final_FM_EAD_Data_3.csv'))
+fwrite(fmdata2d, file=paste0(prep.loc, 'Final_FM_EAD_Data_4.csv'))
 #===============================================================
